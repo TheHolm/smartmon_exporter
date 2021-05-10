@@ -133,7 +133,11 @@ def gen_attr_metrics():
       'path': ('raw', 'value'),
     },
     199: {
+<<<<<<< HEAD
       'name': 'udma_crc_error_total',
+=======
+      'name': 'udma_crc_error_count_total',
+>>>>>>> master
       'type': CounterMetricFamily,
       'path': ('raw', 'value'),
     },
@@ -218,6 +222,7 @@ class SmartmonCollector:
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
 
   parser = argparse.ArgumentParser(description='Prometheus exporter for S.M.A.R.T. metrics.')
   parser.add_argument('-p', metavar='http_port', type=int, default=9541,
@@ -228,5 +233,14 @@ if __name__ == '__main__':
 
   REGISTRY.register(SmartmonCollector())
   start_http_server(args['p'], addr=args['i'])
+=======
+  parser = argparse.ArgumentParser(description='Prometheus exporter for S.M.A.R.T. metrics.')
+  parser.add_argument('--listen-address', '-a', metavar='ADDRESS', type=str, default='', help='Address the exporter should listen on. Default: all')
+  parser.add_argument('--listen-port', '-p', metavar='PORT', type=int, default=9541, help='Port the exporter should listen on. Default: 9541')
+  args = parser.parse_args()
+
+  REGISTRY.register(SmartmonCollector())
+  start_http_server(args.listen_port, args.listen_address)
+>>>>>>> master
   while True:
     time.sleep(60)
